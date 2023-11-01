@@ -19,13 +19,13 @@ import static org.assertj.core.api.Assertions.catchException;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class PaneliteServiceTest {
+class PaneliteExecutorTest {
 
     @Mock
     private ApplicationContext applicationContext;
 
     @InjectMocks
-    private PaneliteService paneliteService;
+    private PaneliteExecutor paneliteExecutor;
 
     @Test
     void shouldFindCommandMethod() {
@@ -33,7 +33,7 @@ class PaneliteServiceTest {
         when(applicationContext.getBeansWithAnnotation(PaneliteGroup.class))
                 .thenReturn(Map.of("example_bean", validBean));
 
-        var objectMethod = paneliteService.findCommandObjectMethod("validGroup", "validCommand");
+        var objectMethod = paneliteExecutor.findCommandObjectMethod("validGroup", "validCommand");
 
         assertThat(objectMethod).isPresent();
         assertThat(objectMethod.get().object()).isSameAs(validBean);
@@ -46,7 +46,7 @@ class PaneliteServiceTest {
         when(applicationContext.getBeansWithAnnotation(PaneliteGroup.class))
                 .thenReturn(Map.of("example_bean", validBean));
 
-        var objectMethod = paneliteService.findCommandObjectMethod("validGroup", "validQuery");
+        var objectMethod = paneliteExecutor.findCommandObjectMethod("validGroup", "validQuery");
 
         assertThat(objectMethod).isNotPresent();
     }
@@ -58,7 +58,7 @@ class PaneliteServiceTest {
         when(applicationContext.getBeansWithAnnotation(PaneliteGroup.class))
                 .thenReturn(Map.of("example_bean", validBean));
 
-        var objectMethod = paneliteService.findQueryObjectMethod("validGroup", "validQuery");
+        var objectMethod = paneliteExecutor.findQueryObjectMethod("validGroup", "validQuery");
 
         assertThat(objectMethod).isPresent();
         assertThat(objectMethod.get().object()).isSameAs(validBean);
@@ -71,7 +71,7 @@ class PaneliteServiceTest {
         when(applicationContext.getBeansWithAnnotation(PaneliteGroup.class))
                 .thenReturn(Map.of("example_bean", validBean));
 
-        var objectMethod = paneliteService.findQueryObjectMethod("validGroup", "validCommand");
+        var objectMethod = paneliteExecutor.findQueryObjectMethod("validGroup", "validCommand");
 
         assertThat(objectMethod).isNotPresent();
     }
@@ -82,7 +82,7 @@ class PaneliteServiceTest {
         when(applicationContext.getBeansWithAnnotation(PaneliteGroup.class))
                 .thenReturn(Map.of("example_bean", duplicatedMethodsBean));
 
-        Exception exception = catchException(() -> paneliteService.findCommandObjectMethod("duplicatedMethodsGroup",
+        Exception exception = catchException(() -> paneliteExecutor.findCommandObjectMethod("duplicatedMethodsGroup",
                 "duplicatedCommand"));
 
         assertThat(exception).isNotNull()
@@ -96,7 +96,7 @@ class PaneliteServiceTest {
         when(applicationContext.getBeansWithAnnotation(PaneliteGroup.class))
                 .thenReturn(Map.of("example_bean", duplicatedMethodsBean));
 
-        Exception exception = catchException(() -> paneliteService.findQueryObjectMethod("duplicatedMethodsGroup",
+        Exception exception = catchException(() -> paneliteExecutor.findQueryObjectMethod("duplicatedMethodsGroup",
                 "duplicatedQuery"));
 
         assertThat(exception).isNotNull()
@@ -113,7 +113,7 @@ class PaneliteServiceTest {
                         "example_bean1", duplicatedBean1,
                         "example_bean2", duplicatedBean2));
 
-        Exception exception = catchException(() -> paneliteService.findCommandObjectMethod("duplicatedGroup", "anything"
+        Exception exception = catchException(() -> paneliteExecutor.findCommandObjectMethod("duplicatedGroup", "anything"
         ));
 
         assertThat(exception).isNotNull()
@@ -130,7 +130,7 @@ class PaneliteServiceTest {
                         "example_bean1", duplicatedBean1,
                         "example_bean2", duplicatedBean2));
 
-        Exception exception = catchException(() -> paneliteService.findCommandObjectMethod("duplicatedGroup", "anything"
+        Exception exception = catchException(() -> paneliteExecutor.findCommandObjectMethod("duplicatedGroup", "anything"
         ));
 
         assertThat(exception).isNotNull()
@@ -147,7 +147,7 @@ class PaneliteServiceTest {
                         "example_bean1", duplicatedBean1,
                         "example_bean2", duplicatedBean2));
 
-        Exception exception = catchException(() -> paneliteService.findQueryObjectMethod("duplicatedGroup", "anything"
+        Exception exception = catchException(() -> paneliteExecutor.findQueryObjectMethod("duplicatedGroup", "anything"
         ));
 
         assertThat(exception).isNotNull()
@@ -164,7 +164,7 @@ class PaneliteServiceTest {
                         "example_bean1", duplicatedBean1,
                         "example_bean2", duplicatedBean2));
 
-        Exception exception = catchException(() -> paneliteService.findQueryObjectMethod("duplicatedGroup", "anything"
+        Exception exception = catchException(() -> paneliteExecutor.findQueryObjectMethod("duplicatedGroup", "anything"
         ));
 
         assertThat(exception).isNotNull()
