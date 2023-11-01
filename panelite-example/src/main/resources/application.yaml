@@ -1,0 +1,21 @@
+logging:
+  level:
+    org:
+      springframework:
+        security: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,health,mappings,panelite,paneliteApi
+
+
+spring:
+  application:
+    name: Example app
+  ldap:
+    embedded:
+      ldif: classpath:example-ldap-server.ldif
+      base-dn: dc=maczkowski,dc=dev
+      port: 389

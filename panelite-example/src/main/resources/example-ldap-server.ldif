@@ -1,0 +1,37 @@
+dn: dc=maczkowski,dc=dev
+objectClass: dcObject
+objectClass: organization
+dc: maczkowski
+o: maczkowski
+
+dn: ou=users,dc=maczkowski,dc=dev
+objectClass: organizationalUnit
+ou: users
+
+dn: cn=user01,ou=users,dc=maczkowski,dc=dev
+objectClass: inetOrgPerson
+cn: user01
+cn: User1
+sn: Bar1
+uid: user01
+userPassword:: Yml0bmFtaTE=
+
+dn: cn=user02,ou=users,dc=maczkowski,dc=dev
+objectClass: inetOrgPerson
+cn: user02
+cn: User2
+sn: Bar2
+uid: user02
+userPassword:: Yml0bmFtaTI=
+
+dn: cn=readers,ou=users,dc=maczkowski,dc=dev
+objectClass: groupOfNames
+cn: readers
+member: cn=user01,ou=users,dc=maczkowski,dc=dev
+member: cn=user02,ou=users,dc=maczkowski,dc=dev
+
+dn: cn=heroes,ou=users,dc=maczkowski,dc=dev
+objectClass: groupOfNames
+cn: heroes
+member: cn=user01,ou=users,dc=maczkowski,dc=dev
+

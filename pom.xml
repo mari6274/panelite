@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>dev.maczkowski.panelite</groupId>
+    <artifactId>panelite</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>panelite</name>
+    <description>Panelite parent pom</description>
+    <modules>
+        <module>panelite-engine</module>
+        <module>panelite-example</module>
+        <module>panelite-spring-boot-starter</module>
+    </modules>
+    <packaging>pom</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>17</java.version>
+        <maven.compiler.release>17</maven.compiler.release>
+        <spring-boot.version>3.1.4</spring-boot.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.maczkowski.panelite</groupId>
+                <artifactId>panelite-engine</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.maczkowski.panelite</groupId>
+                <artifactId>panelite-spring-boot-starter</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
