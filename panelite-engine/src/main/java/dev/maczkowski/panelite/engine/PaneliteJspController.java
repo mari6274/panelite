@@ -2,7 +2,10 @@ package dev.maczkowski.panelite.engine;
 
 import dev.maczkowski.panelite.engine.api.PaneliteMethodType;
 import dev.maczkowski.panelite.engine.api.PaneliteParamType;
-import dev.maczkowski.panelite.engine.dto.*;
+import dev.maczkowski.panelite.engine.dto.ComplexPaneliteParamDto;
+import dev.maczkowski.panelite.engine.dto.PaneliteGroupDto;
+import dev.maczkowski.panelite.engine.dto.PaneliteMethodDto;
+import dev.maczkowski.panelite.engine.dto.SimplePaneliteParamDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.endpoint.web.annotation.ControllerEndpoint;
@@ -18,12 +21,12 @@ public class PaneliteJspController {
     @Value("${spring.application.name}")
     private String applicationName;
 
-    private final PaneliteService paneliteService;
+    private final PaneliteOperationsResolver paneliteOperationsResolver;
 
     @GetMapping
     public String home(Model model) {
 //        model.addAttribute("groups", groupsStub());
-        model.addAttribute("groups", paneliteService.findAvailableOperations());
+        model.addAttribute("groups", paneliteOperationsResolver.findAvailableOperations());
         model.addAttribute("applicationName", applicationName);
         return "v-panelite";
     }
